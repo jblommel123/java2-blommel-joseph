@@ -103,16 +103,28 @@ public class DegreeOfSeparationAction implements MenuAction {
 		}
 		
 		if(userFound) {
-			for (LinkedInUser linkedInUser : usersForMessage) {
-				degreeOfSeparationMessage.append(linkedInUser.getUsername() + " -> " );
+			
+			for (int i = 0; i < usersForMessage.size(); i++) {
+				if (i == (usersForMessage.size() - 1)) {
+					degreeOfSeparationMessage.append(usersForMessage.get(i).getUsername());
+					
+				}
+				
+				else {
+					degreeOfSeparationMessage.append(usersForMessage.get(i).getUsername() + " -> ");
+				}
 			}
+			
+//			for (LinkedInUser linkedInUser : usersForMessage) {
+//				degreeOfSeparationMessage.append(linkedInUser.getUsername() + " -> " );
+//			}
 			System.out.println("There are " + usersForMessage.size() + " degree(s) of separtion between " + userSearchingFor.getUsername()  + " and you.");
 			System.out.println(degreeOfSeparationMessage.toString());
 			return;
 		}
 		
 		else {
-			//recursive call, i know this isn't good but it's what I came up with at my level.
+			
 			degreesOfSeparation++;
 			
 			for (LinkedInUser linkedInUser : listOfConnections) {
@@ -126,6 +138,7 @@ public class DegreeOfSeparationAction implements MenuAction {
 					nextLevelListOfUsersFound.addAll(usersAlreadyFound);
 					nextLevelListOfUsersForMessage.addAll(usersForMessage);
 					nextLevelListOfUsersForMessage.add(linkedInUser);
+					//recursive call, i know this isn't good but it's what I came up with at my level.
 					getDegreesOfSeparation(nextLevelListOfConnections, nextLevelListOfUsersFound, nextLevelListOfUsersForMessage, userSearchingFor, degreesOfSeparation, degreeOfSeparationMessage);
 				
 				
