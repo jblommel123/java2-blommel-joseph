@@ -122,7 +122,7 @@ public class DegreeOfSeparationAction implements MenuAction {
 			System.out.println("Path taken:");
 			
 			for (LinkedInUser linkedInUser : usersForMessage) {
-				System.out.println(linkedInUser.getUsername() + "\n");
+				System.out.println(linkedInUser.getUsername());
 			}
 			System.out.println("Connection not found.");
 			return;
