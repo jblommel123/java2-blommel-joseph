@@ -88,11 +88,6 @@ public class DegreeOfSeparationAction implements MenuAction {
 			//if (usersAlreadyFound.containsAll(listOfConnections)) {
 			//	return;
 			//}
-			
-			if (usersAlreadyFound.contains(linkedInUser)) {
-				continue;
-			}
-			
 			if(linkedInUser.equals(userSearchingFor)) {
 				userFound = true;
 				usersForMessage.add(linkedInUser);
@@ -107,7 +102,6 @@ public class DegreeOfSeparationAction implements MenuAction {
 			for (int i = 0; i < usersForMessage.size(); i++) {
 				if (i == (usersForMessage.size() - 1)) {
 					degreeOfSeparationMessage.append(usersForMessage.get(i).getUsername());
-					
 				}
 				
 				else {
@@ -123,24 +117,37 @@ public class DegreeOfSeparationAction implements MenuAction {
 			return;
 		}
 		
+		if (!userFound && usersAlreadyFound.containsAll(listOfConnections)) {
+			
+			System.out.println("Path taken:");
+			
+			for (LinkedInUser linkedInUser : usersForMessage) {
+				System.out.println(linkedInUser.getUsername() + "\n");
+			}
+			System.out.println("Connection not found.");
+			return;
+		}
+		
 		else {
 			
 			degreesOfSeparation++;
 			
 			for (LinkedInUser linkedInUser : listOfConnections) {
 				//create new lists for recursive calls
+				if (usersAlreadyFound.contains(linkedInUser)) {
+					continue;
+				}
 				usersAlreadyFound.add(linkedInUser);
-				 
+					//only evaluating the first connection, need to figure out how to hit the next connection
 					ArrayList<LinkedInUser> nextLevelListOfConnections = new ArrayList<LinkedInUser>();
-					ArrayList<LinkedInUser> nextLevelListOfUsersFound = new ArrayList<LinkedInUser>();
+					//ArrayList<LinkedInUser> nextLevelListOfUsersFound = new ArrayList<LinkedInUser>();
 					ArrayList<LinkedInUser> nextLevelListOfUsersForMessage = new ArrayList<LinkedInUser>();
 					nextLevelListOfConnections.addAll(linkedInUser.getConnections());
-					nextLevelListOfUsersFound.addAll(usersAlreadyFound);
+					//nextLevelListOfUsersFound.addAll(usersAlreadyFound);
 					nextLevelListOfUsersForMessage.addAll(usersForMessage);
 					nextLevelListOfUsersForMessage.add(linkedInUser);
 					//recursive call, i know this isn't good but it's what I came up with at my level.
-					getDegreesOfSeparation(nextLevelListOfConnections, nextLevelListOfUsersFound, nextLevelListOfUsersForMessage, userSearchingFor, degreesOfSeparation, degreeOfSeparationMessage);
-				
+					getDegreesOfSeparation(nextLevelListOfConnections, usersAlreadyFound, nextLevelListOfUsersForMessage, userSearchingFor, degreesOfSeparation, degreeOfSeparationMessage);
 				
 			}
 		}
