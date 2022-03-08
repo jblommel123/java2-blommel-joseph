@@ -107,6 +107,7 @@ public class SerializedUserRepository implements UserRepository {
 		return userToRetrieve;
 	}
 	//Retrieve all users
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<LinkedInUser> retrieveAll() {
 		File file = new File(this.filePath + this.fileName);
