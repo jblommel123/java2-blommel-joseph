@@ -1,5 +1,6 @@
 package edu.institution.actions.asn4;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,15 +28,17 @@ public class RemoveConnectionAction implements MenuAction {
 		
 		String userToRemoveString = scanner.nextLine();
 		boolean usernameIsNotBlankOrEmpty = AddUserAction.checkUsernameBlankOrEmpty(userToRemoveString);
-		boolean usernameExists = AddUserAction.checkUsernameTaken(connections, userToRemoveString);
-		if (!usernameIsNotBlankOrEmpty && !usernameExists) {
+		boolean usernameIsAConnection = AddUserAction.checkUsernameTaken((ArrayList<LinkedInUser>) connections, userToRemoveString);
+		boolean userExists = AddUserAction.checkUsernameTaken((ArrayList<LinkedInUser>) userRepository.retrieveAll(), userToRemoveString);
+		if (!usernameIsNotBlankOrEmpty && !usernameIsAConnection) {
 			System.out.println("The username you entered was blank, empty, or not one of your connections.");
 			System.out.println("Exiting");
 			return true;
 		}
+		
 		LinkedInUser userRetrieved = userRepository.retrieve(userToRemoveString);
 		
-		if (connections.contains(userRetrieved)) {
+		if (userExists && usernameIsAConnection) {
 			try {
 				loggedInUser.removeConnection(userRetrieved);
 				userRetrieved.removeConnection(loggedInUser);
@@ -43,6 +46,10 @@ public class RemoveConnectionAction implements MenuAction {
 			} catch (LinkedInException e) {
 				System.out.println(e.toString());
 			}
+		}
+		
+		else {
+			System.out.println("Action could not be compeleted. \nExiting.");
 		}
 		
 		return true;

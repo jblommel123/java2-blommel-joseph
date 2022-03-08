@@ -1,5 +1,6 @@
 package edu.institution.actions.asn3;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,16 +14,35 @@ public class DeleteUserAction implements MenuAction {
 	public boolean process(Scanner scanner, UserRepository userRepository, LinkedInUser loggedInUser) {
 		System.out.println("Please enter the username to delete: ");
 		String userNameToSearch = scanner.nextLine();
-		List<LinkedInUser> users = userRepository.retrieveAll();
+		
+		boolean userToDeleteIsLoggedInUser = loggedInUser.getUsername().equalsIgnoreCase(userNameToSearch);
+		
+		String answer = "";
+		if (userToDeleteIsLoggedInUser) {
+			System.out.println("Are you sure you want to delete your account?");
+			System.out.println("Please enter Y to continue");
+			answer = scanner.next();
+		}
+		
+		boolean userWantsToDeleteTheirAccount = false;
+		
+		if(answer.equalsIgnoreCase("Y")) {
+			userWantsToDeleteTheirAccount = true;
+		}
+		
+		
+		ArrayList<LinkedInUser> users = (ArrayList<LinkedInUser>) userRepository.retrieveAll();
 		//check if user exists
 		boolean userNameExists = checkUsernameExists(users, userNameToSearch);
+		
+		
 		
 		if(userNameExists) {
 			LinkedInUser userToDelete = userRepository.retrieve(userNameToSearch);
 			System.out.println("Please enter the username's password. This will exit if the password is incorrect.");
 			String passwordString = scanner.nextLine();
 			boolean passwordIsCorrect = checkPasswordIsCorrect(userToDelete, passwordString);
-			boolean userToDeleteIsLoggedInUser = userNameToSearch.equalsIgnoreCase(userNameToSearch);
+			
 			if (!passwordIsCorrect) {
 				System.out.println("That password is not correct");
 				System.out.println("Back to main menu.");
@@ -34,23 +54,27 @@ public class DeleteUserAction implements MenuAction {
 				return false;
 			}
 			
-			if (passwordIsCorrect && userToDeleteIsLoggedInUser) {
+			if (passwordIsCorrect && userToDeleteIsLoggedInUser && userWantsToDeleteTheirAccount) {
 				userRepository.delete(userToDelete);
 				userRepository.saveAll();
 				return true;
 			}
 			
+			else {
+				System.out.println("Did not delete your account. Going back to menu.");
+				return true;
+			}
+			
 		}
 		else {
-			System.out.println("User doesn't exist. Going to the main menu.");
+			System.out.println("Could not complete action. Going to the main menu.");
 			return true;
 		}
-		return true;
 		
 		
 	}
 	
-	public boolean checkUsernameExists (List<LinkedInUser> users, String usernameToCheck) {
+	public boolean checkUsernameExists (ArrayList<LinkedInUser> users, String usernameToCheck) {
 		for(LinkedInUser user : users) {
 			if(usernameToCheck.equalsIgnoreCase(user.getUsername())) {
 				return true;

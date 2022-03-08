@@ -1,5 +1,6 @@
 package edu.institution.actions.asn4;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import edu.institution.UserRepository;
@@ -32,7 +33,17 @@ public class AddConnectionAction implements MenuAction {
 			return true;
 		}
 		
-		LinkedInUser userToConnect = userRepository.retrieve(usernameToCheck);
+		boolean userExists = AddUserAction.checkUsernameTaken((ArrayList<LinkedInUser>) userRepository.retrieveAll(), usernameToCheck);
+		LinkedInUser userToConnect = new LinkedInUser();
+		if(userExists) {
+			userToConnect = userRepository.retrieve(usernameToCheck);
+		}
+		else {
+			
+			System.out.println("That user does not exist.");
+			System.out.println("Exiting.");
+			return true;
+		}
 		boolean usernameEnteredisLoggedInUser = usernameToCheck.equalsIgnoreCase(loggedInUser.getUsername());
 		
 		if (usernameEnteredisLoggedInUser) {
@@ -40,14 +51,15 @@ public class AddConnectionAction implements MenuAction {
 			System.out.println("Exiting.");
 			return true;
 		}
-		
-		try {
-			loggedInUser.addConnection(userToConnect);
-			userToConnect.addConnection(loggedInUser);
-			System.out.println("The connection was added successfully.");
-			userRepository.saveAll();
-		} catch (LinkedInException e) {
-			System.out.println("Linked in exception: " + e.toString());
+		if (userExists) {
+			try {
+				loggedInUser.addConnection(userToConnect);
+				userToConnect.addConnection(loggedInUser);
+				System.out.println("The connection was added successfully.");
+				userRepository.saveAll();
+			} catch (LinkedInException e) {
+				System.out.println("Linked in exception: " + e.toString());
+			}
 		}
 		
 		return true;

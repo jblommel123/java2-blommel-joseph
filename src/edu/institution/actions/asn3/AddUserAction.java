@@ -1,5 +1,6 @@
 package edu.institution.actions.asn3;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,10 +16,12 @@ public class AddUserAction implements MenuAction {
 		// get username, password, and account type, then add the user to the list
 		//make sure username is unique, and the account type is valid before adding
 		
+		ArrayList<LinkedInUser> users = (ArrayList<LinkedInUser>) userRepository.retrieveAll();
+		
 		System.out.println("Enter username: ");
 		String username = scanner.nextLine();
 		
-		List<LinkedInUser> users = userRepository.retrieveAll();
+		
 		boolean usernameBlankOrEmpty = checkUsernameBlankOrEmpty(username);
 		boolean usernameIsTaken = checkUsernameTaken(users,username);
 		while(usernameIsTaken || usernameBlankOrEmpty) {
@@ -53,14 +56,13 @@ public class AddUserAction implements MenuAction {
 			userRepository.add(newUser);
 			userAdded = true;
 		} catch (LinkedInException e) {
-			System.out.println("In catch for linked in exception");
-			e.toString();
+			System.out.println("In catch for linked in exception" + e.toString());
 		}
 		return userAdded;
 	}
 	
-	public static boolean checkUsernameTaken (List<LinkedInUser> users, String usernameToCheck) {
-		for(LinkedInUser user : users) {
+	public static boolean checkUsernameTaken (ArrayList<LinkedInUser> list, String usernameToCheck) {
+		for(LinkedInUser user : list) {
 			if(usernameToCheck.equalsIgnoreCase(user.getUsername())) {
 				return true;
 			}
