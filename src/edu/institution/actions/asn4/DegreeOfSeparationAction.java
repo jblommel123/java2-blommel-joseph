@@ -112,7 +112,7 @@ public class DegreeOfSeparationAction implements MenuAction {
 //			for (LinkedInUser linkedInUser : usersForMessage) {
 //				degreeOfSeparationMessage.append(linkedInUser.getUsername() + " -> " );
 //			}
-			System.out.println("There are " + usersForMessage.size() + " degree(s) of separtion between " + userSearchingFor.getUsername()  + " and you.");
+			System.out.println("There are " + (usersForMessage.size() - 1) + " degree(s) of separtion between " + userSearchingFor.getUsername()  + " and you.");
 			System.out.println(degreeOfSeparationMessage.toString());
 			return;
 		}

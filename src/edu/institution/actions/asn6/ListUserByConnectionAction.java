@@ -11,7 +11,7 @@ public class ListUserByConnectionAction implements MenuAction {
 	@Override
 	public boolean process(Scanner scanner, UserRepository userRepository, LinkedInUser loggedInUser) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

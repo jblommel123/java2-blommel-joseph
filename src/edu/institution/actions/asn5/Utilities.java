@@ -1,4 +1,4 @@
-package edu.institution.asn5;
+package edu.institution.actions.asn5;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,7 +36,7 @@ public class Utilities   {
 		if(items.size() > 0) {
 			for (int i = 0; i < items.size(); i++) {
 				if(uniqueItemsList.contains(items.get(i))) {
-					System.out.println("UniqueList already has this.");
+					System.out.println("User already exists, skipping.");
 				}
 				
 				else {
@@ -46,6 +46,10 @@ public class Utilities   {
 			
 			items.clear();
 			items.addAll(uniqueItemsList);
+		}
+		
+		else  {
+			System.out.println("This list is empty. \nExiting.");
 		}
 		
 	}

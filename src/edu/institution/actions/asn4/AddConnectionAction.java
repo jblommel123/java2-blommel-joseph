@@ -28,11 +28,11 @@ public class AddConnectionAction implements MenuAction {
 		boolean usernameEnteredBlankOrEmpty = AddUserAction.checkUsernameBlankOrEmpty(usernameToCheck);
 		
 		if (usernameEnteredBlankOrEmpty) {
-			System.out.println("That username is blank or the user doesn't exist.");
+			System.out.println("That username is blank or empty text.");
 			System.out.println("Exiting.");
 			return true;
 		}
-		
+		//make sure the user exists
 		boolean userExists = AddUserAction.checkUsernameTaken((ArrayList<LinkedInUser>) userRepository.retrieveAll(), usernameToCheck);
 		LinkedInUser userToConnect = new LinkedInUser();
 		if(userExists) {
@@ -44,6 +44,7 @@ public class AddConnectionAction implements MenuAction {
 			System.out.println("Exiting.");
 			return true;
 		}
+		//check if the user is trying to add their own account.
 		boolean usernameEnteredisLoggedInUser = usernameToCheck.equalsIgnoreCase(loggedInUser.getUsername());
 		
 		if (usernameEnteredisLoggedInUser) {
@@ -51,6 +52,8 @@ public class AddConnectionAction implements MenuAction {
 			System.out.println("Exiting.");
 			return true;
 		}
+		
+		//try and add the connection
 		if (userExists) {
 			try {
 				loggedInUser.addConnection(userToConnect);
