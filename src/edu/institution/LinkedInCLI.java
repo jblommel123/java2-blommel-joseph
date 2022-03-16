@@ -14,7 +14,7 @@ package edu.institution;
 
 import java.io.File;
 
-import src.edu.institution.actions.asn3.SerializedUserRepository;
+import edu.institution.actions.asn3.SerializedUserRepository;
 
 /**
  * The command line interface for LinkedIn.

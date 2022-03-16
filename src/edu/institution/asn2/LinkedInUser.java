@@ -2,6 +2,7 @@ package edu.institution.asn2;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser> {
 /**
@@ -83,5 +84,8 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 		
 		return intToReturn;
 	}
-
+	
+	
+	
+	
 }

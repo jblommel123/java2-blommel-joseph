@@ -1,5 +1,7 @@
 package edu.institution.actions.asn6;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import edu.institution.UserRepository;
@@ -10,8 +12,12 @@ public class ListUserByTypeAction implements MenuAction {
 
 	@Override
 	public boolean process(Scanner scanner, UserRepository userRepository, LinkedInUser loggedInUser) {
-		// TODO Auto-generated method stub
-		return false;
+		ArrayList<LinkedInUser> userList = (ArrayList<LinkedInUser>)userRepository.retrieveAll();
+		Collections.sort(userList, new LinkedInUserAccountTypeComparator());
+		for (LinkedInUser linkedInUser : userList) {
+			System.out.println("User: " + linkedInUser.getUsername() + "; Account Type = " + linkedInUser.getType());
+		}
+		return true;
 	}
 
 }
