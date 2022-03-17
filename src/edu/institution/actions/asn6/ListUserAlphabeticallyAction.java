@@ -21,7 +21,7 @@ public class ListUserAlphabeticallyAction implements MenuAction {
 		duplicateList.addAll(userRepository.retrieveAll());
 		
 		System.out.println("List of duplicates before removing duplicates.");
-		utilities.listItems(duplicateList);
+
 		System.out.println("List is passed in to remove duplicates and lists out unique items.");
 		utilities.removeDuplicates(duplicateList);
 		
