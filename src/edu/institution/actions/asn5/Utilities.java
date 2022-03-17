@@ -12,7 +12,6 @@ public class Utilities   {
 		
 		if(list.size() < 1) {
 			System.out.println("This list is empty. Give me something to work with.");
-			return null;
 		}
 		
 		for (int i = 0; i < list.size(); i++) {
@@ -20,16 +19,10 @@ public class Utilities   {
 				return list.get(i);
 			}
 		}
-		
 		return null;
 	}
 	
-	public <T> void listItems(List<T> listThings) {
-		for (T t : listThings) {
-			System.out.println(t.toString());
-		}
-
-	}
+	
 	
 	public <T> void removeDuplicates (List<T> items) {
 		List<T> uniqueItemsList = new ArrayList<T>();
@@ -46,10 +39,6 @@ public class Utilities   {
 			
 			items.clear();
 			items.addAll(uniqueItemsList);
-		}
-		
-		else  {
-			System.out.println("This list is empty. \nExiting.");
 		}
 		
 	}
