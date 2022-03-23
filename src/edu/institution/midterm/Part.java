@@ -57,7 +57,4 @@ public class Part {
 		return Objects.equals(partNumber, other.partNumber);
 	}
 	
-	
-	
-	
 }
