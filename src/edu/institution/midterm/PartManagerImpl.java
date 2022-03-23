@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,6 +39,8 @@ public class PartManagerImpl implements PartManager {
 
 	@Override
 	public Part costPart(String partNumber) {
+		
+		
 		return null;
 	}
 	@Override
@@ -75,6 +78,9 @@ public class PartManagerImpl implements PartManager {
 				purchaseParts.add(part);
 			}
 		}
+		
+		NumberOfPartsComparatorByPrice compareByPrice = new NumberOfPartsComparatorByPrice();
+		Collections.sort(purchaseParts,compareByPrice);
 		return purchaseParts;
 		
 		//sort the parts by highest to lowest price
