@@ -1,6 +1,5 @@
 package edu.institution.midterm;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
@@ -81,6 +80,7 @@ public class PartManagerImpl implements PartManager {
 		
 		NumberOfPartsComparatorByPrice compareByPrice = new NumberOfPartsComparatorByPrice();
 		Collections.sort(purchaseParts,compareByPrice);
+		
 		return purchaseParts;
 		
 		//sort the parts by highest to lowest price
