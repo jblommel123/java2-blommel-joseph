@@ -3,13 +3,18 @@ package edu.institution.midterm;
 import java.util.Objects;
 
 public class BomEntry {
-	private String partNumberString;
+	private String partNumber;
 	private int quantity;
+	public BomEntry(String partNumberString, int quantity) {
+		super();
+		this.partNumber = partNumberString;
+		this.quantity = quantity;
+	}
 	public String getPartNumberString() {
-		return partNumberString;
+		return partNumber;
 	}
 	public void setPartNumberString(String partNumberString) {
-		this.partNumberString = partNumberString;
+		this.partNumber = partNumberString;
 	}
 	public int getQuantity() {
 		return quantity;
@@ -20,11 +25,11 @@ public class BomEntry {
 	
 	@Override
 	public String toString() {
-		return "BomEntry [partNumberString=" + partNumberString + ", quantity=" + quantity + "]";
+		return "BomEntry [partNumberString=" + partNumber + ", quantity=" + quantity + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(partNumberString);
+		return Objects.hash(partNumber);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -35,7 +40,7 @@ public class BomEntry {
 		if (getClass() != obj.getClass())
 			return false;
 		BomEntry other = (BomEntry) obj;
-		return Objects.equals(partNumberString, other.partNumberString);
+		return Objects.equals(partNumber, other.partNumber);
 	}
 	
 	

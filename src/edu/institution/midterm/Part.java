@@ -10,6 +10,14 @@ public class Part {
 	private float price;
 	private List<BomEntry> billOfMaterial;
 	
+	public Part(String partNumber, String name, String partType, float price, List<BomEntry> billOfMaterial) {
+		super();
+		this.partNumber = partNumber;
+		this.name = name;
+		this.partType = partType;
+		this.price = price;
+		this.billOfMaterial = billOfMaterial;
+	}
 	//getters and setters
 	public String getPartNumber() {
 		return partNumber;

@@ -1,6 +1,7 @@
 package edu.institution.asn2;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -11,6 +12,7 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 	private static final long serialVersionUID = 7923776203647316583L;
 	//must implement serializable
 	private String type;
+	private Set<String> skillSet;
 	private List<LinkedInUser> connections = new ArrayList<>();
 	public LinkedInUser(String Username, String Password) {
 		super(Username, Password);
@@ -85,6 +87,18 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 		return intToReturn;
 	}
 	
+	/** Returns the skillsets. */
+	public Set<String> getSkillsets(){
+		return skillSet;
+	}
+	/** Adds the supplied skillset to this user. */
+	public void addSkillset(String skillset) {
+		this.skillSet.add(skillset);
+	}
+	/** Removes the supplied skillset from this user. */
+	public void removeSkillset(String skillset) {
+		this.skillSet.remove(skillset);
+	}
 	
 	
 	
