@@ -43,6 +43,11 @@ public class PartManagerImpl implements PartManager {
 
 	@Override
 	public Part costPart(String partNumber) {
+		
+		
+		//read bill of materials part list
+		//
+		
 		Part partToCost = null;
 		boolean partFound = false;
 		for (Part part : parts) {
@@ -54,16 +59,19 @@ public class PartManagerImpl implements PartManager {
 		
 		float extendedPrice = 0.0f;
 		
-		if(partToCost.getBillOfMaterial().isEmpty()) {
+		if(partToCost.getBillOfMaterial() == null) {
 			extendedPrice = 1* partToCost.getPrice();
+			roundForMoney(extendedPrice);
+			
 		}
 		
 		else {
 			List<BomEntry> listOfSubcomponents = partToCost.getBillOfMaterial();
 			for (BomEntry bomEntry : listOfSubcomponents) {
-				Part subComponent = retrievePart(partNumber);
-				extendedPrice += (bomEntry.getQuantity() * costPart(subComponent.getPartNumber()).getPrice());
+				Part subComponent = retrievePart(bomEntry.getPartNumberString() );
+				extendedPrice += roundForMoney(bomEntry.getQuantity() * costPart(subComponent.getPartNumber()).getPrice());
 			}
+			
 			partToCost.setPrice(extendedPrice);
 		}
 		
@@ -73,7 +81,7 @@ public class PartManagerImpl implements PartManager {
 		
 	}
 	
-	private float roundForMoney(float value) {
+	public float roundForMoney(float value) {
 		return new BigDecimal(value).setScale(2, RoundingMode.HALF_UP).floatValue();
 	}
 	

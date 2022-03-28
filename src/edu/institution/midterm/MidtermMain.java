@@ -21,13 +21,13 @@ public class MidtermMain {
 		listOfParts = partManagerImpl.getPurchasedPartsByPrice();
 		
 		for (Part part : listOfParts) {
-			System.out.println("Part number is " + part.getPartNumber() + " and the price is " + part.getPrice());
+			System.out.println("Part name: " + part.getName());
 		}
 		
-		String testPartNumberString = "20-0001";
+		String testPartNumberString = "290B7266J6";
 		Part testPart = partManagerImpl.retrievePart(testPartNumberString);
 		partManagerImpl.costPart(testPart.getPartNumber());
-		System.out.println("Test Part price is " + testPart.getPrice());
+		System.out.println("Test Part price is $" + partManagerImpl.roundForMoney(testPart.getPrice()));
 		
 	}
 
