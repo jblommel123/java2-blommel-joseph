@@ -110,6 +110,16 @@ public class PartManagerImpl implements PartManager {
 			}
 		}
 		
+		SortAssembyPartsByName sortAssembyPartsByName = new SortAssembyPartsByName();
+		
+		Collections.sort(finalAssembliesList, sortAssembyPartsByName);
+		
+		System.out.println("Parts List Alphabetical");
+		
+		for (Part part : finalAssembliesList) {
+			System.out.println("THis" + "Part name: " + part.getName());
+		}
+		
 		return finalAssembliesList;
 	}
 

@@ -20,8 +20,10 @@ public class MidtermMain {
 		List<Part> listOfParts = new ArrayList<Part>();
 		listOfParts = partManagerImpl.getPurchasedPartsByPrice();
 		
-		for (Part part : listOfParts) {
-			System.out.println("Part name: " + part.getName());
+		List<Part> partsSortedByName = partManagerImpl.getFinalAssemblies();
+		
+		for (Part part : partsSortedByName) {
+			System.out.println( "Part type :" + part.getPartType() +"; Part name: " + part.getName());
 		}
 		
 		String testPartNumberString = "290B7266J6";
