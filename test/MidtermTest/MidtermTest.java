@@ -1,5 +1,6 @@
 package MidtermTest;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,8 +15,7 @@ import edu.institution.midterm.PartManagerImpl;
 
 public class MidtermTest {
 	
-	
-	private static String PATH = "C:\\Users\\nicho\\joe-homework\\java2-blommel-joseph\\TestData\\";
+	private static String PATH = System.getProperty("user.home") + File.separator + "Java2" + File.separator;
 	private static String FILE_NAME = "bom.json";
 	
 	private static String jsonFilePath = PATH+FILE_NAME;

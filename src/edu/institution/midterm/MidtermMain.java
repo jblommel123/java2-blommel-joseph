@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MidtermMain {
-	private static String PATH = "C:\\Users\\nicho\\joe-homework\\java2-blommel-joseph\\TestData\\";
+	private static String PATH = System.getProperty("user.home") + File.separator + "Java2" + File.separator;
 	private static String FILE_NAME = "bom.json";
 	
 	private static String jsonFilePath = PATH+FILE_NAME;
