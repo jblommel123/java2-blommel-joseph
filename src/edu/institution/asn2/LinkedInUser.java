@@ -93,11 +93,26 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 	}
 	/** Adds the supplied skillset to this user. */
 	public void addSkillset(String skillset) {
-		this.skillSet.add(skillset);
+		if (this.skillSet.contains(skillset)) {
+			System.out.println("You already have this skill");
+		}
+		else {
+			System.out.println("Skill " + skillset + " added.");
+			this.skillSet.add(skillset);
+		}
+		
 	}
 	/** Removes the supplied skillset from this user. */
 	public void removeSkillset(String skillset) {
-		this.skillSet.remove(skillset);
+		
+		if(this.skillSet.contains(skillset)){
+			this.skillSet.remove(skillset);
+		}
+		
+		else {
+			System.out.println("Unable to remove a skillset you don't have.");
+		}
+		
 	}
 	
 	
