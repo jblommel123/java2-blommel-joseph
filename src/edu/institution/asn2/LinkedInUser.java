@@ -3,7 +3,7 @@ package edu.institution.asn2;
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashSet;
 
 public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser> {
 /**
@@ -16,6 +16,7 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 	private List<LinkedInUser> connections = new ArrayList<>();
 	public LinkedInUser(String Username, String Password) {
 		super(Username, Password);
+		skillSet = new HashSet<String>();
 	}
 
 	public LinkedInUser() {
@@ -88,11 +89,16 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 	}
 	
 	/** Returns the skillsets. */
-	public Set<String> getSkillsets(){
+	public Set<String> getSkillSet() {
 		return skillSet;
 	}
+
 	/** Adds the supplied skillset to this user. */
 	public void addSkillset(String skillset) {
+		if (this.skillSet == null) {
+			this.skillSet = new HashSet<String>();
+		}
+		
 		if (this.skillSet.contains(skillset)) {
 			System.out.println("You already have this skill");
 		}
@@ -104,12 +110,12 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 	}
 	/** Removes the supplied skillset from this user. */
 	public void removeSkillset(String skillset) {
-		
-		if(this.skillSet.contains(skillset)){
-			this.skillSet.remove(skillset);
+		if(this.skillSet == null) {
+			System.out.println("There is no skill to remove here.");
 		}
 		
 		else {
+			this.skillSet.remove(skillset);
 			System.out.println("Unable to remove a skillset you don't have.");
 		}
 		

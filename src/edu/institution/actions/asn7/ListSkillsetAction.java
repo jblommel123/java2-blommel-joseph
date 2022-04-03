@@ -1,6 +1,7 @@
 package edu.institution.actions.asn7;
 
 import java.util.Scanner;
+import java.util.Set;
 
 import edu.institution.UserRepository;
 import edu.institution.actions.MenuAction;
@@ -10,8 +11,20 @@ public class ListSkillsetAction implements MenuAction {
 
 	@Override
 	public boolean process(Scanner scanner, UserRepository userRepository, LinkedInUser loggedInUser) {
-		// TODO Auto-generated method stub
-		return false;
+		Set<String> loggedInUserSkills = loggedInUser.getSkillSet();
+		
+		if(loggedInUserSkills.isEmpty()) {
+			System.out.println("You don't have any skills to list. Add a skillset please.");
+			return true;
+		}
+		else {
+			for (String skill : loggedInUserSkills) {
+				
+				System.out.println("Skill: " + skill);
+			}
+		}
+		
+		return true;
 	}
 
 }

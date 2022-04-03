@@ -12,6 +12,8 @@
  */
 package edu.institution;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +24,13 @@ import edu.institution.asn2.LinkedInUser;
  */
 public class ApplicationHelper {
 	
+	/**
+	* I picked the hashmap so that I can store each skillset as a string and 
+	*
+	* 
+	*/
 	
+	private static HashMap<String, Integer> usersSkillsets= new HashMap<String, Integer>();
 
 	/**
 	 * Displays the supplied message to the console.
@@ -42,6 +50,28 @@ public class ApplicationHelper {
 	*/
 	public static void incrementSkillsetCount(String skillset) {
 		
+		if (usersSkillsets.containsKey(skillset)) {
+			Integer numberToIncrement = usersSkillsets.get(skillset);
+			numberToIncrement++;
+			usersSkillsets.put(skillset, numberToIncrement);
+		}
+		else {
+			System.out.println("Adding skillset " + skillset + " to HashMap.");
+			usersSkillsets.put(skillset, 1);
+			
+		}
+		
+	}
+	
+	public static void decreaseSkillsetCount(String skillSet) {
+		if (usersSkillsets.containsKey(skillSet) && usersSkillsets.get(skillSet) > 0) {
+			Integer numberToIncrement = usersSkillsets.get(skillSet);
+			numberToIncrement--;
+			usersSkillsets.put(skillSet, numberToIncrement);
+		}
+		else if(usersSkillsets.get(skillSet) == 0) {
+			System.out.println("Could not lower that skillset count because it doesn't exist or isn't associated with any user.");
+		}
 	}
 	
 	/**
@@ -51,7 +81,12 @@ public class ApplicationHelper {
 	* @param skillset the skillset to lookup.
 	*/
 	public static int retrieveSkillsetCount(String skillset) {
-		return 0;
+		if (usersSkillsets.containsKey(skillset)) {
+			return usersSkillsets.get(skillset);
+		} else {
+			System.out.println("This skillset doesn't exist. Returning -1");
+			return -1;
+		}
 	}
 	
 	/**
@@ -62,7 +97,25 @@ public class ApplicationHelper {
 	*/
 	public static void initSkillsetUsages(List<LinkedInUser> users) {
 		
+		for (LinkedInUser linkedInUser : users) {
+			HashSet<String> userskillset = (HashSet<String>) linkedInUser.getSkillSet();
+			
+			if (userskillset == null) {
+				continue;
+			}
+			
+			if(userskillset.isEmpty()) {
+				continue;
+			}
+			for (String skillString : userskillset)
+			{
+				incrementSkillsetCount(skillString);
+			}
+		}
+		
 	}
+	
+
 	
 	
 }

@@ -26,6 +26,7 @@ public class LinkedInCLI {
 	public static void main(String[] args) {
 		UserRepository userRepository = new SerializedUserRepository();
 		userRepository.init(PATH, FILE_NAME);
+		ApplicationHelper.initSkillsetUsages(userRepository.retrieveAll());
 		ApplicationController controller = new ApplicationController(userRepository);
 		controller.process();
 	}
