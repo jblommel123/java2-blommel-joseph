@@ -51,7 +51,8 @@ public class MetricData implements Comparable<MetricData> {
 	
 	@Override
 	public int compareTo(MetricData o) {
-		return this.getExecutionTime() == o.getExecutionTime() ? 0: this.getExecutionTime() > o.getExecutionTime() ? 1 : -1;
+		return this.getExecutionTime() == o.getExecutionTime() ? 0:
+			this.getExecutionTime() > o.getExecutionTime() ? 1 : -1;
 	}
 
 }
