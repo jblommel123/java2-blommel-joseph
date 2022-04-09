@@ -1,6 +1,7 @@
 package edu.institution.actions.asn7;
 
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import edu.institution.ApplicationHelper;
@@ -16,12 +17,27 @@ public class AddSkillsetAction implements MenuAction {
 		System.out.println("Please enter the name of a skillset you want to add. Must contain at least 3 characters and no numbers.");
 		String input = scanner.nextLine();
 		
-		while (input.isBlank() || input.isEmpty()) {
-			System.out.println("Invalid input. Please enter a skillset.");
-			scanner.nextLine();
+		Set<String> listOfSkills = loggedInUser.getSkillSet();
+		
+		System.out.println("Here's a list of your skills");
+		
+		for (String string : listOfSkills) {
+			System.out.println("Skill: " + string);
 		}
-		ApplicationHelper.incrementSkillsetCount(input);
-		loggedInUser.addSkillset(input);
+		
+		while (input.isBlank() || input.isEmpty() || !Pattern.matches("^[a-zA-Z]{3,}", input)) {
+			System.out.println("Invalid input. Please enter a skillset.");
+			input = scanner.nextLine();
+		}
+		
+		if(!loggedInUser.getSkillSet().contains(input)) {
+			ApplicationHelper.incrementSkillsetCount(input);
+			loggedInUser.addSkillset(input);
+		}
+		else {
+			System.out.println("You already have that skillset.");
+		}
+		
 		return true;
 	}
 

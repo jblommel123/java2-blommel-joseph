@@ -3,6 +3,7 @@ package edu.institution.actions.asn7;
 import java.util.Scanner;
 import java.util.Set;
 
+import edu.institution.ApplicationHelper;
 import edu.institution.UserRepository;
 import edu.institution.actions.MenuAction;
 import edu.institution.asn2.LinkedInUser;
@@ -20,7 +21,7 @@ public class ListSkillsetAction implements MenuAction {
 		else {
 			for (String skill : loggedInUserSkills) {
 				
-				System.out.println("Skill: " + skill);
+				System.out.println("Skill: " + skill + " has " + ApplicationHelper.retrieveSkillsetCount(skill) + " users.");
 			}
 		}
 		

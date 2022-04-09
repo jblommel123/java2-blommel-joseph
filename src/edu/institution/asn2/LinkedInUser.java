@@ -1,6 +1,7 @@
 package edu.institution.asn2;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,6 +18,26 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 	public LinkedInUser(String Username, String Password) {
 		super(Username, Password);
 		skillSet = new HashSet<String>();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(skillSet);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LinkedInUser other = (LinkedInUser) obj;
+		return Objects.equals(skillSet, other.skillSet);
 	}
 
 	public LinkedInUser() {

@@ -12,10 +12,9 @@
  */
 package edu.institution;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeMap;
 
 import edu.institution.asn2.LinkedInUser;
 
@@ -25,12 +24,11 @@ import edu.institution.asn2.LinkedInUser;
 public class ApplicationHelper {
 	
 	/**
-	* I picked the hashmap so that I can store each skillset as a string and 
-	*
+	* I picked the treemap so that I can store each skillset as a string and then retrieve it alphabetically.
 	* 
 	*/
 	
-	private static HashMap<String, Integer> usersSkillsets= new HashMap<String, Integer>();
+	private static TreeMap<String, Integer> usersSkillsets= new TreeMap<String, Integer>();
 
 	/**
 	 * Displays the supplied message to the console.

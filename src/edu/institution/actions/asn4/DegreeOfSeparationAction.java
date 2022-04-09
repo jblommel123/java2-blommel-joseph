@@ -61,20 +61,6 @@ public class DegreeOfSeparationAction implements MenuAction {
 			int degreesOfSeparation, 
 			StringBuffer degreeOfSeparationMessage) {
 		
-		
-		//see if they have any connections, if not, say no connections and you are exiting
-		//loop through logged in user's connections
-		//make a list of their connections
-		//see if their connections have the username you're looking for
-		//if you don't find the username, say not found
-		//if you do, output the steps you took to that username
-		//if so, end and output the message with degrees of separation and a list of steps
-		
-		//go through connections
-		//see if that is the user your looking for
-		//keep track of list, make new list for each call before call, so that each one is populated with the right usernames to 
-		//what happens if a is connected to b, b connected to c, c connected to A
-		
 		if(listOfConnections.isEmpty()) {
 			return;
 		}
@@ -83,17 +69,12 @@ public class DegreeOfSeparationAction implements MenuAction {
 		
 		//iterate through connections and see if one is the user.
 		for (LinkedInUser linkedInUser : listOfConnections) {
-			//try and prevent calling an infinite recursive loop
-			//if you have checked all the connections and this is still being called, it could cause an infinite loop
-			//if (usersAlreadyFound.containsAll(listOfConnections)) {
-			//	return;
-			//}
+			
 			if(linkedInUser.equals(userSearchingFor)) {
 				userFound = true;
 				usersForMessage.add(linkedInUser);
 				break;
 			}
-			//usersAlreadyFound.add(linkedInUser);
 			
 		}
 		
@@ -109,9 +90,6 @@ public class DegreeOfSeparationAction implements MenuAction {
 				}
 			}
 			
-//			for (LinkedInUser linkedInUser : usersForMessage) {
-//				degreeOfSeparationMessage.append(linkedInUser.getUsername() + " -> " );
-//			}
 			System.out.println("There are " + (usersForMessage.size() - 1) + " degree(s) of separtion between " + userSearchingFor.getUsername()  + " and you.");
 			System.out.println(degreeOfSeparationMessage.toString());
 			return;
@@ -140,13 +118,10 @@ public class DegreeOfSeparationAction implements MenuAction {
 				usersAlreadyFound.add(linkedInUser);
 					//only evaluating the first connection, need to figure out how to hit the next connection
 					ArrayList<LinkedInUser> nextLevelListOfConnections = new ArrayList<LinkedInUser>();
-					//ArrayList<LinkedInUser> nextLevelListOfUsersFound = new ArrayList<LinkedInUser>();
 					ArrayList<LinkedInUser> nextLevelListOfUsersForMessage = new ArrayList<LinkedInUser>();
 					nextLevelListOfConnections.addAll(linkedInUser.getConnections());
-					//nextLevelListOfUsersFound.addAll(usersAlreadyFound);
 					nextLevelListOfUsersForMessage.addAll(usersForMessage);
 					nextLevelListOfUsersForMessage.add(linkedInUser);
-					//recursive call, i know this isn't good but it's what I came up with at my level.
 					getDegreesOfSeparation(nextLevelListOfConnections, usersAlreadyFound, nextLevelListOfUsersForMessage, userSearchingFor, degreesOfSeparation, degreeOfSeparationMessage);
 				
 			}
