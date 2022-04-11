@@ -3,6 +3,12 @@ package edu.institution.asn9;
 import java.util.Objects;
 
 public class MetricData implements Comparable<MetricData> {
+		@Override
+	public String toString() {
+		return "MetricData using the sortAlgorithm = " + sortAlgorithm + ", with a timeComplexity = " + timeComplexity + ", executionTime = "
+				+ executionTime + " ms.";
+	}
+
 		//The sort algorithm for the data
 		private SortAlgorithm sortAlgorithm;
 		//the time complexity for the sort algorithm

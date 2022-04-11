@@ -2,39 +2,47 @@ package edu.institution.asn9;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class SortAlgorithmMetrics  {
 	public List<MetricData> retrieveMetrics(String filePath) {
 		List<MetricData> listOfResults = new ArrayList<MetricData>();
 		File integerFile = new File(filePath);
-		
-		
-		List<Integer> numbers = null; // assume this contains the list of 80000 Integers.
-		if(integerFile.exists()) {
-			try(FileInputStream fis = new FileInputStream(integerFile);
-					ObjectInputStream ois = new ObjectInputStream(fis)){
-					numbers = (List<Integer>)ois.readObject();
-			} catch (Exception e) {
-				e.toString();
+		List<Integer> numbers = new ArrayList<Integer>();
+		try {
+			try (Scanner scanner = new Scanner(integerFile)) {
+				while (scanner.hasNextInt()) {
+					numbers.add(scanner.nextInt());
+				}
 			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
 		}
-		Integer[] template = {}; // tells toArray what type of Array to generate
+		
+		// assume this contains the list of 80000 Integers.
+		
+		// tells toArray what type of Array to generate
+		Integer[] template = {}; 
 		Integer[] bubbleSortlist = numbers.toArray(template);
 		Integer[] insertionSortList = numbers.toArray(template);
 		Integer[] heapSortList = numbers.toArray(template);
 		Integer[] mergeSortList = numbers.toArray(template);
 		Integer[] quickSortList = numbers.toArray(template); 
 		
+		//Create each data object
 		MetricData insertionSortData = new MetricData(SortAlgorithm.INSERTION_SORT);
 		MetricData bubbleSortData = new MetricData(SortAlgorithm.BUBBLE_SORT);
 		MetricData heapSortData = new MetricData(SortAlgorithm.HEAP_SORT);
 		MetricData mergeSortData = new MetricData(SortAlgorithm.MERGE_SORT);
 		MetricData quickSortData = new MetricData(SortAlgorithm.QUICK_SORT);
+		
 		//time sort 
 		LocalTime startTimeInsertionSort = LocalTime.now();
 		InsertionSort.insertionSort(insertionSortList);
@@ -51,7 +59,7 @@ public class SortAlgorithmMetrics  {
 		
 		elapsedMilliseconds = Duration.between(startTimeBubbleSort,endTimeBubbleSort).toMillis();
 		bubbleSortData.setExecutionTime(elapsedMilliseconds);
-		insertionSortData.setTimeComplexity(TimeComplexity.QUADRATIC);
+		bubbleSortData.setTimeComplexity(TimeComplexity.QUADRATIC);
 		
 		//heap sort
 		LocalTime startTimeHeapSort = LocalTime.now();
@@ -76,7 +84,7 @@ public class SortAlgorithmMetrics  {
 		LocalTime endTimeQuickSort = LocalTime.now();
 		elapsedMilliseconds = Duration.between(startTimeQuickSort, endTimeQuickSort).toMillis();
 		quickSortData.setExecutionTime(elapsedMilliseconds);
-		quickSortData.setTimeComplexity(TimeComplexity.QUADRATIC);
+		quickSortData.setTimeComplexity(TimeComplexity.LOGARITHMIC);
 		
 		
 		//populate list of results
@@ -86,6 +94,7 @@ public class SortAlgorithmMetrics  {
 		listOfResults.add(quickSortData);
 		listOfResults.add(bubbleSortData);
 		
+		Collections.sort(listOfResults);
 		//return the list
 		return listOfResults;
 	 }
