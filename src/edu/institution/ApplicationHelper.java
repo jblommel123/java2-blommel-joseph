@@ -54,7 +54,7 @@ public class ApplicationHelper {
 			usersSkillsets.put(skillset, numberToIncrement);
 		}
 		else {
-			System.out.println("Adding skillset " + skillset + " to HashMap.");
+			System.out.println("Adding skillset " + skillset + " to TreeMap.");
 			usersSkillsets.put(skillset, 1);
 			
 		}

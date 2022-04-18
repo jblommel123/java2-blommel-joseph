@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import edu.institution.UserRepository;
 import edu.institution.actions.MenuAction;
+import edu.institution.actions.asn10.LinkedInAction;
+import edu.institution.actions.asn10.UndoAction;
 import edu.institution.asn2.LinkedInException;
 import edu.institution.asn2.LinkedInUser;
 import edu.institution.actions.asn3.AddUserAction;
@@ -42,6 +44,11 @@ public class RemoveConnectionAction implements MenuAction {
 			try {
 				loggedInUser.removeConnection(userRetrieved);
 				userRetrieved.removeConnection(loggedInUser);
+				LinkedInAction actionTaken = new LinkedInAction();
+				actionTaken.setMenuTitle("Remove Connection");
+				actionTaken.setDataObject(userRetrieved);
+				actionTaken.setMenuOption(7);
+				UndoAction.actionHistory.push(actionTaken);
 				userRepository.saveAll();
 			} catch (LinkedInException e) {
 				System.out.println(e.toString());

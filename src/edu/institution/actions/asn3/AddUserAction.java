@@ -1,11 +1,11 @@
 package edu.institution.actions.asn3;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import edu.institution.UserRepository;
 import edu.institution.actions.MenuAction;
+import edu.institution.actions.asn10.LinkedInAction;
 import edu.institution.asn2.LinkedInException;
 import edu.institution.asn2.LinkedInUser;
 
@@ -15,6 +15,7 @@ public class AddUserAction implements MenuAction {
 	public boolean process(Scanner scanner, UserRepository userRepository, LinkedInUser loggedInUser) {
 		// get username, password, and account type, then add the user to the list
 		//make sure username is unique, and the account type is valid before adding
+		
 		
 		ArrayList<LinkedInUser> users = (ArrayList<LinkedInUser>) userRepository.retrieveAll();
 		
@@ -39,7 +40,8 @@ public class AddUserAction implements MenuAction {
 			password = scanner.nextLine();
 			passwordIsBlankOrEmpty = checkPasswordIsBlankOrEmpty(password);
 		}
-
+		
+		
 		System.out.println("Enter P or p for Premier account or S or s for Standard.");
 		String accountType = scanner.nextLine();
 		boolean accountTypeIsCorrect = accountTypeIsCorrect(accountType);
@@ -58,6 +60,7 @@ public class AddUserAction implements MenuAction {
 		} catch (LinkedInException e) {
 			System.out.println("In catch for linked in exception" + e.toString());
 		}
+		
 		return userAdded;
 	}
 	
