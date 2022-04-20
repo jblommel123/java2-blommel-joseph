@@ -35,6 +35,7 @@ public class AddSkillsetAction implements MenuAction {
 		if(!loggedInUser.getSkillSet().contains(input)) {
 			ApplicationHelper.incrementSkillsetCount(input);
 			loggedInUser.addSkillset(input);
+			userRepository.saveAll();
 			LinkedInAction actionTaken = new LinkedInAction(12,"Add Skillset", input);
 			UndoAction.actionHistory.push(actionTaken);
 		}

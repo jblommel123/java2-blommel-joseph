@@ -32,6 +32,7 @@ public class RemoveSkillsetAction implements MenuAction {
 		if(loggedInUser.getSkillSet().contains(input)) {
 			ApplicationHelper.decreaseSkillsetCount(input);
 			loggedInUser.getSkillSet().remove(input);
+			userRepository.saveAll();
 			System.out.println( input + " removed");
 			LinkedInAction actionTaken = new LinkedInAction(13,"Remove Skillset",input);
 			UndoAction.actionHistory.push(actionTaken);
