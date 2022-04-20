@@ -3,6 +3,9 @@ package edu.institution.asn2;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import edu.institution.UserRepository;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -127,6 +130,7 @@ public class LinkedInUser extends UserAccount implements Comparable<LinkedInUser
 			System.out.println("Skill " + skillset + " added.");
 			this.skillSet.add(skillset);
 		}
+		
 		
 	}
 	/** Removes the supplied skillset from this user. */
