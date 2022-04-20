@@ -2,6 +2,7 @@ package edu.institution.asn11;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class BST<E extends Comparable<E>> {
@@ -220,5 +221,21 @@ public class BST<E extends Comparable<E>> {
 			list.clear();
 			inorder();
 		}
+	}
+	
+	/**
+	* Traverses the nodes using the breadth-first traversal algorithm and
+	* and returns a list of elements in the correct order.
+	* @return the elements in the order that reflects a breadth-first traversal.
+	*/
+	public List<E> breadthFirstTraversal() {
+		return null;
+	}
+	/**
+	* Returns the number of edges between the tree's root and its furthest leaf.
+	* @return the height.
+	*/
+	public int getHeight() {
+		return 1;
 	}
 }

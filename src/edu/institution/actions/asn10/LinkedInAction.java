@@ -1,8 +1,5 @@
 package edu.institution.actions.asn10;
 
-import edu.institution.actions.MenuAction;
-import edu.institution.asn2.LinkedInUser;
-
 //use this class to keep track of the action and information to undo
 
 public class LinkedInAction {

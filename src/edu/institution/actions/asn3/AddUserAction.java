@@ -6,6 +6,7 @@ import java.util.Scanner;
 import edu.institution.UserRepository;
 import edu.institution.actions.MenuAction;
 import edu.institution.actions.asn10.LinkedInAction;
+import edu.institution.actions.asn10.UndoAction;
 import edu.institution.asn2.LinkedInException;
 import edu.institution.asn2.LinkedInUser;
 
@@ -55,8 +56,12 @@ public class AddUserAction implements MenuAction {
 		newUser.setType(accountType);
 		boolean userAdded = false;
 		try {
+			
 			userRepository.add(newUser);
 			userAdded = true;
+			LinkedInAction actionTaken = new LinkedInAction(2,"Add a user", newUser);
+			UndoAction.actionHistory.push(actionTaken);
+			
 		} catch (LinkedInException e) {
 			System.out.println("In catch for linked in exception" + e.toString());
 		}

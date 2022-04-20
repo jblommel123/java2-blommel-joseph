@@ -44,12 +44,9 @@ public class RemoveConnectionAction implements MenuAction {
 			try {
 				loggedInUser.removeConnection(userRetrieved);
 				userRetrieved.removeConnection(loggedInUser);
-				LinkedInAction actionTaken = new LinkedInAction();
-				actionTaken.setMenuTitle("Remove Connection");
-				actionTaken.setDataObject(userRetrieved);
-				actionTaken.setMenuOption(7);
-				UndoAction.actionHistory.push(actionTaken);
 				userRepository.saveAll();
+				LinkedInAction actionTaken = new LinkedInAction(7,"Remove Connection", userRetrieved);
+				UndoAction.actionHistory.push(actionTaken);
 			} catch (LinkedInException e) {
 				System.out.println(e.toString());
 			}

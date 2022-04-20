@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 import edu.institution.ApplicationHelper;
 import edu.institution.UserRepository;
 import edu.institution.actions.MenuAction;
+import edu.institution.actions.asn10.LinkedInAction;
+import edu.institution.actions.asn10.UndoAction;
 import edu.institution.asn2.LinkedInUser;
 
 public class AddSkillsetAction implements MenuAction {
@@ -33,6 +35,8 @@ public class AddSkillsetAction implements MenuAction {
 		if(!loggedInUser.getSkillSet().contains(input)) {
 			ApplicationHelper.incrementSkillsetCount(input);
 			loggedInUser.addSkillset(input);
+			LinkedInAction actionTaken = new LinkedInAction(12,"Add Skillset", input);
+			UndoAction.actionHistory.push(actionTaken);
 		}
 		else {
 			System.out.println("You already have that skillset.");

@@ -40,8 +40,7 @@ public class AddConnectionAction implements MenuAction {
 		if(userExists) {
 			userToConnect = userRepository.retrieve(usernameToCheck);
 		}
-		
-		
+			
 		else {
 			
 			System.out.println("That user does not exist.");
@@ -49,7 +48,7 @@ public class AddConnectionAction implements MenuAction {
 			return true;
 		}
 		
-		LinkedInAction actionTaken = new LinkedInAction();
+		
 		
 		//check if the user is trying to add their own account.
 		boolean usernameEnteredisLoggedInUser = usernameToCheck.equalsIgnoreCase(loggedInUser.getUsername());
@@ -65,12 +64,12 @@ public class AddConnectionAction implements MenuAction {
 			try {
 				loggedInUser.addConnection(userToConnect);
 				userToConnect.addConnection(loggedInUser);
-				actionTaken.setMenuTitle("Add Connection");
-				actionTaken.setDataObject(userToConnect);
-				actionTaken.setMenuOption(6);
-				UndoAction.actionHistory.push(actionTaken);
+				
 				System.out.println("The connection was added successfully.");
 				userRepository.saveAll();
+				
+				LinkedInAction actionTaken = new LinkedInAction(6,"Add Connection", userToConnect);
+				UndoAction.actionHistory.push(actionTaken);
 			} catch (LinkedInException e) {
 				System.out.println("Linked in exception: " + e.toString());
 			}

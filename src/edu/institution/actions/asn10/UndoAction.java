@@ -84,9 +84,6 @@ public class UndoAction implements MenuAction {
 				String skillSetToAdd = (String) action.getDataObject();
 				loggedInUser.addSkillset(skillSetToAdd);
 				ApplicationHelper.incrementSkillsetCount(skillSetToAdd);
-				
-			
-
 			default:
 				System.out.println("Hit the default. Just exiting.");
 				break;
