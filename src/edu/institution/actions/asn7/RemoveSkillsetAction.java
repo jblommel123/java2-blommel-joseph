@@ -18,6 +18,11 @@ public class RemoveSkillsetAction implements MenuAction {
 		Set<String> listOfSkills = loggedInUser.getSkillSet();
 		System.out.println("Here's a list of your skills");
 		
+		if(listOfSkills == null || listOfSkills.isEmpty()) {
+			System.out.println("You don't have any skills. Please add one before trying to remove a skillset.");
+			return true;
+		}
+		
 		for (String string : listOfSkills) {
 			System.out.println("Skill: " + string);
 		}

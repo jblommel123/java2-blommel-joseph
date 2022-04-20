@@ -23,9 +23,16 @@ public class AddSkillsetAction implements MenuAction {
 		
 		System.out.println("Here's a list of your skills");
 		
-		for (String string : listOfSkills) {
-			System.out.println("Skill: " + string);
+		if(listOfSkills == null || listOfSkills.isEmpty()) {
+			
 		}
+		
+		else {
+			for (String string : listOfSkills) {
+				System.out.println("Skill: " + string);
+			}
+		}
+		
 		
 		while (input.isBlank() || input.isEmpty() || !Pattern.matches("^[a-zA-Z]{3,}", input)) {
 			System.out.println("Invalid input. Please enter a skillset.");

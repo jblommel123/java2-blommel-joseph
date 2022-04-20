@@ -14,7 +14,7 @@ public class ListSkillsetAction implements MenuAction {
 	public boolean process(Scanner scanner, UserRepository userRepository, LinkedInUser loggedInUser) {
 		Set<String> loggedInUserSkills = loggedInUser.getSkillSet();
 		
-		if(loggedInUserSkills.isEmpty()) {
+		if(loggedInUserSkills == null || loggedInUserSkills.isEmpty() ) {
 			System.out.println("You don't have any skills to list. Add a skillset please.");
 			return true;
 		}
