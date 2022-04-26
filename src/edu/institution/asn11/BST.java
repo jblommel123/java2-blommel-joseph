@@ -2,14 +2,19 @@ package edu.institution.asn11;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
+import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.BeanWriterProcessor;
+import org.junit.platform.engine.support.hierarchical.Node;
 
 
 public class BST<E extends Comparable<E>> {
 
 	protected TreeNode<E> root;
 	protected int size = 0;
-	
+	protected int height = 0;
 	public BST() { }
 	
 	public BST(E[] objects) {
@@ -228,14 +233,61 @@ public class BST<E extends Comparable<E>> {
 	* and returns a list of elements in the correct order.
 	* @return the elements in the order that reflects a breadth-first traversal.
 	*/
-	public List<E> breadthFirstTraversal() {
-		return null;
+	public List<E> breadthFirstTraversal(TreeNode<E> root) {
+		
+		if(root == null) {
+			return null;
+		}
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		Queue<TreeNode> queueToReturn = new LinkedList<TreeNode>();
+		TreeNode<E> temp = root;
+		queue.add(temp);
+		queueToReturn.add(temp);
+		int level = 0;
+		
+		while(!queue.isEmpty()) {
+			
+			TreeNode refNode = queue.remove();
+			System.out.println(refNode.toString() + " - Node");
+			
+			if(refNode.left != null) {
+				queue.add(refNode.left);
+				queueToReturn.add(refNode.left);
+				level++;
+			}
+			
+			if(refNode.right != null) {
+				queue.add(refNode.right);
+				queueToReturn.add(refNode.right);
+				
+			}
+			
+		}
+		
+		return (List<E>) queueToReturn;
+		
 	}
 	/**
 	* Returns the number of edges between the tree's root and its furthest leaf.
 	* @return the height.
 	*/
-	public int getHeight() {
-		return 1;
+	public int getHeight(TreeNode<E> node) {
+		if(node == null) {
+			return -1;
+		}
+		else {
+			int ldepth = getHeight(node.left);
+			int rdepth = getHeight(node.right);
+			
+			if(ldepth > rdepth) {
+				return (ldepth+1);
+			}
+			else {
+				return (rdepth + 1);
+			}
+		}
 	}
+	
+	
 }
