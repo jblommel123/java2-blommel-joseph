@@ -8,20 +8,26 @@ public class BSTMain {
 
 	public static void main(String[] args) {
 		BST binarySearchTree = new BST<String>();
-		binarySearchTree.root = new TreeNode<String>("Test");
-		binarySearchTree.root.left = new TreeNode<String>("Korn");
-		binarySearchTree.root.right = new TreeNode<String>("Maggots");
-		binarySearchTree.root.left.left = new TreeNode<String>("String");
+		TreeNode<String> root = new TreeNode<String>("Test");
+		TreeNode<String> one = new TreeNode<String>("Korn");
+		TreeNode<String> two = new TreeNode<String>("Maggots");
+		TreeNode<String> three = new TreeNode<String>("String");
+
 		
-		
+		binarySearchTree.root = root;
+		binarySearchTree.root.left = one;
+		binarySearchTree.root.right = two;
+		binarySearchTree.root.left.left = three;
 		
 		System.out.println(binarySearchTree.getRoot());
 		
 		List<TreeNode> returnedList = binarySearchTree.breadthFirstTraversal(binarySearchTree.root);
 		
-		for (TreeNode treeNode : returnedList) {
-			System.out.println(treeNode.toString());
-		}
+		binarySearchTree.nonRecursiveInorder(binarySearchTree.root);
+		
+		
+		
+		
 		
 		System.out.println("Height is " + binarySearchTree.getHeight(binarySearchTree.root));
 		

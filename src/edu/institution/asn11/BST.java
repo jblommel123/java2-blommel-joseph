@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.BeanWriterProcessor;
 import org.junit.platform.engine.support.hierarchical.Node;
@@ -232,6 +233,7 @@ public class BST<E extends Comparable<E>> {
 	* Traverses the nodes using the breadth-first traversal algorithm and
 	* and returns a list of elements in the correct order.
 	* @return the elements in the order that reflects a breadth-first traversal.
+	* https://stackoverflow.com/questions/5262308/how-do-implement-a-breadth-first-traversal/5262484
 	*/
 	public List<E> breadthFirstTraversal(TreeNode<E> root) {
 		
@@ -271,6 +273,7 @@ public class BST<E extends Comparable<E>> {
 	/**
 	* Returns the number of edges between the tree's root and its furthest leaf.
 	* @return the height.
+	* https://www.geeksforgeeks.org/write-a-c-program-to-find-the-maximum-depth-or-height-of-a-tree/
 	*/
 	public int getHeight(TreeNode<E> node) {
 		if(node == null) {
@@ -287,6 +290,31 @@ public class BST<E extends Comparable<E>> {
 				return (rdepth + 1);
 			}
 		}
+	}
+	//https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
+	public void nonRecursiveInorder(TreeNode<E> root) {
+		
+		if (root == null) {
+			return;
+		}
+		
+		Stack<TreeNode> nodes = new Stack<TreeNode>();
+		TreeNode currentNode = root;
+		
+		while (currentNode != null || nodes.size() > 0) {
+			while (currentNode != null) {
+				nodes.push(currentNode);
+				currentNode = currentNode.left;
+			}
+			
+			currentNode = nodes.pop();
+			
+			System.out.println(currentNode.toString() + " - In non recursive order");
+			
+			currentNode = currentNode.right;
+		}
+		
+		
 	}
 	
 	
