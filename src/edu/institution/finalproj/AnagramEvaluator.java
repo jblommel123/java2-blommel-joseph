@@ -11,5 +11,5 @@ public interface AnagramEvaluator {
 	* default to “words”.
 	* @return the list of words derived from the supplied anagram.
 	*/
-	List<String> evaluate(String anagram, String options);
+	List<String> evaluate(String anagram, String option);
 }
